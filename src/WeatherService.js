@@ -24,7 +24,6 @@ export const getFormattedWeatherData = async (city, units) => {
   return {
     description,
     iconURL: makeIconUrl(icon),
-    // icon,
     temp,
     feels_like,
     temp_min,
