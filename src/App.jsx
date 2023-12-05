@@ -1,3 +1,5 @@
+import Description from "./components/Description";
+
 function App() {
   return (
     <>
@@ -19,6 +21,7 @@ function App() {
                 <h1>34 C</h1>
               </div>
             </div>
+            <Description />
           </div>
         </div>
       </div>
