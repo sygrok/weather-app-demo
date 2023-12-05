@@ -4,7 +4,7 @@ const makeIconUrl = (iconId) => {
   return `https://openweathermap.org/img/wn/${iconId}.png`;
 };
 
-export const getFormattedWeatherData = async (city, units = "metric") => {
+export const getFormattedWeatherData = async (city, units) => {
   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${units}`;
 
   const data = await fetch(URL)

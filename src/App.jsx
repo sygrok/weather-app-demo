@@ -4,10 +4,11 @@ import { getFormattedWeatherData } from "./WeatherService";
 
 function App() {
   const [weather, setWeather] = useState("paris");
+  const [units, setUnits] = useState("metric");
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const data = await getFormattedWeatherData(weather);
+      const data = await getFormattedWeatherData(weather, units);
       setWeather(data);
     };
 
@@ -20,7 +21,17 @@ function App() {
           <div className="container">
             <div className="section section__inputs">
               <input type="text" name="city" placeholder="Enter City" />
-              <button>°F</button>
+              <button
+                onClick={() => {
+                  if (units === "metric") {
+                    setUnits("imperial");
+                  } else {
+                    setUnits("metric");
+                  }
+                }}
+              >
+                °{units === "metric" ? "C" : "F"}
+              </button>
             </div>
 
             <div className="section section__temperature">
@@ -32,10 +43,12 @@ function App() {
                 <h3>{weather.description}</h3>
               </div>
               <div className="temperature">
-                <h1>{weather.temp?.toFixed()}°C</h1>
+                <h1>
+                  {weather.temp?.toFixed()}°{units === "metric" ? "C" : "F"}
+                </h1>
               </div>
             </div>
-            <Description weather={weather} />
+            <Description weather={weather} units={units} />
           </div>
         </div>
       </div>
