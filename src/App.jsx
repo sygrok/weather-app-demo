@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <section className="app">
+      <div className="app">
         <div className="overlay">
           <div className="container">
             <div className="section section__inputs">
@@ -9,7 +9,7 @@ function App() {
               <button>f</button>
             </div>
 
-            <div className="section section__ temperature">
+            <div className="section section__temperature">
               <div className="icon">
                 <h3>London, GB</h3>
                 <img src="dsa" alt="weatherIcon" />
@@ -21,7 +21,7 @@ function App() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }
