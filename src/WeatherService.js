@@ -1,4 +1,4 @@
-const API_KEY = "e1894962d85814e048359cffda95b540";
+const API_KEY = "3c04a87e06beca598cf72ac306613a0f";
 
 const makeIconUrl = (iconId) => {
   return `https://openweathermap.org/img/wn/${iconId}.png`;
@@ -17,11 +17,14 @@ export const getFormattedWeatherData = async (city, units) => {
     wind: { speed },
     sys: { country },
     name,
+    dt,
   } = data;
 
   const { description, icon } = weather[0];
+  console.log(data);
 
   return {
+    dt,
     description,
     iconURL: makeIconUrl(icon),
     temp,

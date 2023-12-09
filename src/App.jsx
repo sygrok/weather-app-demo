@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Description from "./components/Description";
 import { getFormattedWeatherData } from "./WeatherService";
+import { FaSearch } from "react-icons/fa";
 
 function App() {
   const [city, setCity] = useState("istanbul");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
+  const [cityInput, setCityInput] = useState("");
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -14,7 +16,7 @@ function App() {
     };
 
     fetchWeatherData();
-  }, [units, city]);
+  }, [city, units]);
 
   const handleUnitsClick = (x) => {
     const button = x.currentTarget;
@@ -24,40 +26,69 @@ function App() {
     setUnits(isC ? "metric" : "imperial");
   };
 
-  const enterKeyPressed = (x) => {
-    if (x.keyCode === 13) {
-      setCity(x.currentTarget.value);
-      x.currentTarget.blur();
+  const searchHandler = (x) => {
+    x.preventDefault();
+    setCity(cityInput);
+  };
+
+  const getSeasonFromTimestamp = (unixTimestamp) => {
+    const date = new Date(unixTimestamp * 1000);
+    const month = date.getMonth() + 1;
+
+    if (month >= 3 && month <= 5) {
+      return "spring";
+    } else if (month >= 6 && month <= 8) {
+      return "summer";
+    } else if (month >= 9 && month <= 11) {
+      return "autumn";
+    } else {
+      return "winter";
     }
   };
 
   return (
     <>
-      <div className="app">
+      <div className={`app ${getSeasonFromTimestamp(weather?.dt)}`}>
         <div className="overlay">
           {weather && (
             <div className="container">
               <div className="section section__inputs">
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="Enter City"
-                  onKeyDown={enterKeyPressed}
-                />
-                <button onClick={(x) => handleUnitsClick(x)}>°F</button>
+                {/* input */}
+                <div className="input-div">
+                  <input
+                    type="text"
+                    name="city"
+                    placeholder="Enter City"
+                    value={cityInput}
+                    onChange={(x) => setCityInput(x.target.value)}
+                  />
+                  <button
+                    className="input__button"
+                    onClick={searchHandler}
+                    type="submit"
+                  >
+                    <FaSearch />
+                  </button>
+                </div>
+                <button
+                  className="metric__button"
+                  onClick={(x) => handleUnitsClick(x)}
+                >
+                  °F
+                </button>
               </div>
 
               <div className="section section__temperature">
                 <div className="icon">
                   <h3>
-                    {weather.name} {weather.country}
+                    {weather?.name} {weather?.country}
                   </h3>
-                  <img src={weather.iconURL} alt="weatherIcon" />
-                  <h3>{weather.description}</h3>
+                  <img src={weather?.iconURL} alt="weatherIcon" />
+                  <h3>{weather?.description}</h3>
                 </div>
                 <div className="temperature">
                   <h1>
-                    {weather.temp.toFixed()}°{units === "metric" ? "C" : "F"}
+                    {weather?.temp.toFixed()}°{units === "metric" ? "C" : "F"}
                   </h1>
                 </div>
               </div>
@@ -71,3 +102,20 @@ function App() {
 }
 
 export default App;
+
+{
+  /* <input
+  type="text"
+  name="city"
+  placeholder="Enter City"
+  onKeyDown={enterKeyPressed}
+/>;
+
+
+const enterKeyPressed = (x) => {
+  if (x.keyCode === 13) {
+    setCity(x.currentTarget.value);
+    x.currentTarget.blur();
+  }
+}; */
+}

@@ -10,8 +10,17 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-body {
-  background-color: lightblue;
+.spring {
+  background: url("./assets/spring.jpg");
+}
+.summer {
+  background: url("./assets/summer.jpg");
+}
+.winter {
+  background: url("./assets/winter.jpg");
+}
+.autumn {
+  background: url("./assets/autumn.jpg");
 }
 
 .app {
@@ -53,7 +62,7 @@ body {
   background-color: var(--section-overlay);
 }
 
-.section__inputs > input {
+.section__inputs .input-div > input {
   border: 0.8px solid white;
   border-radius: 0.4rem;
   background-color: transparent;
@@ -63,11 +72,11 @@ body {
   font-weight: 200;
 }
 
-.section__inputs > input:focus {
+.section__inputs .input-div > input:focus {
   outline: none;
 }
 
-.section__inputs > button {
+.section__inputs > .metric__button {
   padding: 10px 50px;
   border: none;
   border-radius: 00.4rem;
@@ -76,7 +85,7 @@ body {
   background-color: white;
 }
 
-.section__inputs > button:hover {
+.section__inputs > .metric__button:hover {
   cursor: pointer;
   background-color: lightgray;
 }
@@ -96,4 +105,19 @@ body {
 
 .temperature > h1 {
   font-size: 60px;
+}
+
+.input__button {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  left: -35px;
+  top: 2px;
+  font-size: x-large;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.input__button:hover {
+  background-color: white;
 }
