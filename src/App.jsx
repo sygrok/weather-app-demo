@@ -102,20 +102,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <input
-  type="text"
-  name="city"
-  placeholder="Enter City"
-  onKeyDown={enterKeyPressed}
-/>;
-
-
-const enterKeyPressed = (x) => {
-  if (x.keyCode === 13) {
-    setCity(x.currentTarget.value);
-    x.currentTarget.blur();
-  }
-}; */
-}
