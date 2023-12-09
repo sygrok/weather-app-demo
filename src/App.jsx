@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import Description from "./components/Description";
 import { getFormattedWeatherData } from "./WeatherService";
 import { FaSearch } from "react-icons/fa";
+import gif from "./assets/loading.gif";
 
 function App() {
   const [city, setCity] = useState("istanbul");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
   const [cityInput, setCityInput] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const fetchWeatherData = async () => {
       const data = await getFormattedWeatherData(city, units);
       setWeather(data);
+      setLoading(false);
     };
 
     fetchWeatherData();
@@ -50,7 +54,13 @@ function App() {
     <>
       <div className={`app ${getSeasonFromTimestamp(weather?.dt)}`}>
         <div className="overlay">
-          {weather && (
+          {loading && (
+            <div className="loading">
+              <img src={gif} />
+            </div>
+          )}
+
+          {weather && !loading && (
             <div className="container">
               <div className="section section__inputs">
                 {/* input */}
