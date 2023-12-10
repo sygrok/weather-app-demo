@@ -32,7 +32,14 @@ function App() {
 
   const searchHandler = (x) => {
     x.preventDefault();
-    setCity(cityInput);
+
+    if (!cityInput || cityInput.trim() === "") {
+      setCity("istanbul");
+    } else if (cityInput !== weather.name) {
+      alert("City not found?");
+    } else {
+      setCity(cityInput);
+    }
   };
 
   const getSeasonFromTimestamp = (unixTimestamp) => {
